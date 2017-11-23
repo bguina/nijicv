@@ -1,2 +1,3 @@
 server/public/**/*.js
+server/bundle.js
 node_modules

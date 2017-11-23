@@ -10,6 +10,11 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "parserOptions": {
+        "ecmaVersion": 8,
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
         "sourceType": "module"
     },
     "plugins": [
@@ -17,8 +22,8 @@ module.exports = {
     ],
     "rules": {
         "indent": [
-            "warn",
-            "tab"
+            "error",
+            4
         ],
         "quotes": [
             "warn",
@@ -42,3 +47,4 @@ module.exports = {
         ]
     }
 };
+

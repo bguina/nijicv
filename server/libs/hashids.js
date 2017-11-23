@@ -8,5 +8,5 @@ let config = require("../config");
  * Use `module` as prefix of the `hashSecret`
  */
 module.exports = function(module, length) {
-	return new Hashids(module + config.hashSecret, length || 10);
+    return new Hashids(module + config.hashSecret, length || 10);
 };

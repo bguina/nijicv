@@ -115,17 +115,17 @@ $ docker-compose up
 ## Directory structure
 ```txt
 +---build
-+---client
-|   +---app
-|   |   +---core
-|   |   +---modules
++---client // client applications and embed resources
+|   +---app // main app
+|   |   +---core    // common front templates and scripts
+|   |   +---modules // pages templates and scripts
 |   |       +---demo
 |   |       +---devices
 |   |       +---home
 |   |       +---posts
 |   |       +---session
 |   |                   
-|   +---frontend
+|   +---frontend // landing screen
 |   +---images
 |   +---scss
 |                   
@@ -149,17 +149,16 @@ $ docker-compose up
 |   |       test.js
 |   |       
 |   +---core
-|   +---libs
-|   +---locales
+|   +---libs        // server helpers
+|   +---locales     // translations
 |   |   +---en
 |   |   +---hu
-|   +---models
+|   +---models  // common data models
 |   |       user.js
 |   +---public
 |   +---routes
-|   +---schema
 |   +---services
-|   +---views
+|   +---views   // non-application, "static" nested templates
 +---tests
 |
 |   package.json

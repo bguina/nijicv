@@ -1,68 +1,96 @@
 "use strict";
 
-// let ROOT 			= "../../";
-let logger 			= require("../../core/logger");
-let config 			= require("../../config");
+// let ROOT             = "../../";
+let logger          = require("../../core/logger");
+let config          = require("../../config");
 
-let _ 				= require("lodash");
-let tokgen 			= require("../../libs/tokgen");
-let fakerator		= require("fakerator")();
+let _               = require("lodash");
+let tokgen          = require("../../libs/tokgen");
+let fakerator       = require("fakerator")();
 
-let User 			= require("../.././models/user");
-let Device 			= require("../modules/devices/models/device");
-let Post 			= require("../modules/posts/models/post");
+let User            = require("../.././models/user");
+let Cv              = require("../modules/cv/models/cv");
+let Experience      = require("../modules/experiences/models/experience");
 
 module.exports = function() {
-	let devices = Device.find({}).exec().then((docs) => {
-		if (docs.length === 0) {
-			logger.warn("Load default Devices to DB...");
+    let cvs = Cv.find({}).exec().then((docs) => {
+        logger.info("Looking up current cvs...");
 
-			_.times(36, () => {
+        if (docs.length === 0 && true) {
+            logger.warn("Load default Cvs to DB...");
 
-				let device = new Device({
-					address: fakerator.internet.ip(),
-					type: fakerator.random.arrayElement(["rasperry", "odroid", "nanopi", "pc"]),
-					name: fakerator.populate("#{names.firstName}'s device"),
-					description: fakerator.lorem.sentence(),
-					status: fakerator.random.boolean("80") ? 1 : 0,
-					lastCommunication: Date.now()
-				});
+            {
+                let tag = "android";
+                let xp = new Experience({
+                    business: tag + " business name",
+                    tags: ["", tag],
+                    position: "travail sur " + tag,
+                    description: "mais genre vraiment de ouf",
+                    startedAt: 0,
+                    endedAt: 5
+                });
 
-				return device.save().then(() => {
-					logger.info("Default devices created!");
-				});
-			});
-		}
-	});
+                xp.save().then(() => {
+                    logger.info("Default xp created!");
+                });
 
-	let posts = Post.find({}).exec(function(err, docs) {
-		if (docs.length === 0) {
-			logger.warn("Load default Posts to DB...");
+                let cv = new Cv({
+                    name: "Benoit Guina",
+                    title: "Développeur Android",
+                    thumbnailUrl: "https://image.freepik.com/free-vector/android-boot-logo_634639.jpg",
+                    tag: "android",
+                    status: 1
+                });
 
-			User.find({}).lean().select("_id").exec((err, users) => {
-				if (users && users.length > 0) {
-					_.times(60, () => {
+                cv.save().then(() => {
+                    logger.info("Default" + "created!");
+                });
+            }
 
-						let fakePost = fakerator.entity.post(fakerator.random.number(2,1));
+            {
+                let tag = "web";
+                let xp = new Experience({
+                    business: tag + " business name",
+                    tags: ["", tag],
+                    position: "travail sur " + tag,
+                    description: "mais genre vraiment de ouf",
+                    startedAt: 0,
+                    endedAt: 5
+                });
 
-						let post = new Post({
-							title: fakePost.title,
-							content: fakePost.content,
-							author: fakerator.random.arrayElement(users)._id
-						});
+                xp.save().then(() => {
+                    logger.info("Default xp created!");
+                });
 
-						return post.save().then(() => {
-							logger.info("Default posts created!");
-						});
+                let cv = new Cv({
+                    name: "Benoit Guina",
+                    title: "Développeur web",
+                    thumbnailUrl: "https://cdn.dribbble.com/users/79486/screenshots/1505622/logo-2_1x.jpg",
+                    tag: "web",
+                    status: 1
+                });
 
-						// TODO make voters
-					});
-				}
+                cv.save().then(() => {
+                    logger.info("Default" + "created!");
+                });
+            }
 
-			});
+            {
+                let tag ="";
+                let cv = new Cv({
+                    name: "Benoit Guina",
+                    title: "Développeur logiciel",
+                    thumbnailUrl: "Ma tete",
+                    tag: "",
+                    status: 1
+                });
 
-		}
-	});
+                cv.save().then(() => {
+                    logger.info("Default" + "created!");
+                });
+            }
+        }
+    });
 
-	return Promise.all([devices, posts]);
+    return cvs;
 };

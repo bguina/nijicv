@@ -1,65 +1,65 @@
 "use strict";
 
-let logger 		= require("../../../core/logger");
-let config 		= require("../../../config");
-let C 	 			= require("../../../core/constants");
+let logger      = require("../../../core/logger");
+let config      = require("../../../config");
+let C               = require("../../../core/constants");
 
-let _ 				= require("lodash");
+let _               = require("lodash");
 
-let Sockets		= require("../../../core/sockets");
+let Sockets     = require("../../../core/sockets");
 
 let personService;
 
 module.exports = {
-	settings: {
-		name: "session",
-		version: 1,
-		namespace: "session",
-		rest: true,
-		ws: true,
-		graphql: true,
-		permission: C.PERM_LOGGEDIN,
-		role: "user"
-	},
+    settings: {
+        name: "session",
+        version: 1,
+        namespace: "session",
+        rest: true,
+        ws: true,
+        graphql: true,
+        permission: C.PERM_LOGGEDIN,
+        role: "user"
+    },
 
-	actions: {
+    actions: {
 
-		// return my User model
-		me(ctx) {
-			return Promise.resolve(ctx.user).then( (doc) => {
-				return personService.toJSON(doc);
-			});
-		},
+        // return my User model
+        me(ctx) {
+            return Promise.resolve(ctx.user).then( (doc) => {
+                return personService.toJSON(doc);
+            });
+        },
 
-		// return all online users
-		onlineUsers(ctx) {
-			return Promise.resolve().then(() => {
-				return personService.toJSON(_.map(Sockets.userSockets, (s) => s.request.user));
-			});
-		}
-	},
+        // return all online users
+        onlineUsers(ctx) {
+            return Promise.resolve().then(() => {
+                return personService.toJSON(_.map(Sockets.userSockets, (s) => s.request.user));
+            });
+        }
+    },
 
-	init(ctx) {
-		personService = this.services("persons");
-	},
+    init(ctx) {
+        personService = this.services("persons");
+    },
 
-	graphql: {
+    graphql: {
 
-		query: `
-			me: Person
-			onlineUsers: [Person]
-		`,
+        query: `
+            me: Person
+            onlineUsers: [Person]
+        `,
 
-		mutation: `
-		`,
+        mutation: `
+        `,
 
-		resolvers: {
-			Query: {
-				me: "me",
-				onlineUsers: "onlineUsers"
-			}
-		}
-	}
+        resolvers: {
+            Query: {
+                me: "me",
+                onlineUsers: "onlineUsers"
+            }
+        }
+    }
 
 };
 

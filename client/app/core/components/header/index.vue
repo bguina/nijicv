@@ -1,35 +1,35 @@
 <template lang="pug">
-	section.page-header
+    section.page-header
 
-		logo.left
+        logo.left
 
-		.menu-toggle.left(@click="toggleSidebar()")
-			i.fa.fa-bars
+        .menu-toggle.left(@click="toggleSidebar()")
+            i.fa.fa-bars
 
-		search-box.left
+        search-box.left
 
-		user-box.right
+        user-box.right
 
 </template>
 
 <script>
-	import Logo from "./logo";
-	import SearchBox from "./search-box";
-	import UserBox from "./user-box";
+    import Logo from "./logo";
+    import SearchBox from "./search-box";
+    import UserBox from "./user-box";
 
-	export default {
-		components: {
-			Logo,
-			SearchBox,
-			UserBox
-		},
+    export default {
+        components: {
+            Logo,
+            SearchBox,
+            UserBox
+        },
 
-		props: [
-			"toggleSidebar"
-		]
+        props: [
+            "toggleSidebar"
+        ]
 
-	};
-	
+    };
+    
 </script>
 
 <style lang="scss">
