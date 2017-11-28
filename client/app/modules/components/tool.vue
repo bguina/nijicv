@@ -1,7 +1,8 @@
 <template lang="pug">
     li.tool
         a(v-bind:href="linkUrl")
-            img.img-thumbnail(v-if="thumbnailUrl" v-bind:src="thumbnailUrl" v-bind:alt="name")
+            i.fa(v-if="!thumbnailIsUrl()" aria-hidden="true" v-bind:class="thumbnailUrl") class="fa fa-handshake-o" ></i>
+            img.img-thumbnail(v-if="thumbnailIsUrl()" v-bind:src="thumbnailUrl" v-bind:alt="name")
         | {{ name }}
 </template>
 
@@ -14,6 +15,13 @@
             };
         },
         methods: {
+            thumbnailIsUrl() {
+                if (this.thumbnailUrl) {
+                    if (this.thumbnailUrl.startsWith("http"))
+                        return true;
+                }
+                return false;
+            },
         }
     };
 </script>
@@ -24,10 +32,10 @@
         display: inline;
 
         .img-thumbnail {
-            width: 1.8em;
-            height: 1.8em;
+            width: 1.6em;
+            height: 1.6em;
             margin: 0 .4em;
-            padding: .25rem;
+            padding: 0;
         }
 
         :first-letter {

@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Skill,
-        modelPropFilter: "type name tools"
+        modelPropFilter: "type name description tools"
     },
     
     actions: {
@@ -52,6 +52,7 @@ module.exports = {
             let skill = new Skill({
                 type: ctx.params.type,
                 name: ctx.params.name,
+                description: ctx.params.description
             });
 
             return skill.save()
@@ -79,6 +80,9 @@ module.exports = {
 
                 if (ctx.params.name != null)
                     doc.name = ctx.params.name;
+
+                if (ctx.params.description != null)
+                    doc.description = ctx.params.description;
 
                 if (ctx.params.tools != null) {
                     if (1 == ctx.params.tools.length) {
@@ -128,6 +132,7 @@ module.exports = {
         validateParams(ctx, strictMode) {
             ctx.validateParam("type").trim().notEmpty(ctx.t("app:SkillTypeCannotBeBlank")).end();
             ctx.validateParam("name").trim().notEmpty(ctx.t("app:SkillNameCannotBeBlank")).end();
+            ctx.validateParam("description").trim().notEmpty(ctx.t("app:SkillDescriptionCannotBeBlank")).end();
 
             if (ctx.hasValidationErrors())
                 throw ctx.errorBadRequest(C.ERR_VALIDATION_ERROR, ctx.validationErrors);            
@@ -155,13 +160,14 @@ module.exports = {
         type Skill {
             type: String!
             name: String!
+            description: String!
             tools: [String!]
         }
         `,
 
         mutation: `
-        skillCreate(type: String!, name: String!): Skill
-        skillUpdate(code: String!, type: String!, name: String!, tools: [String!]): Skill
+        skillCreate(type: String!, name: String!, description: String!): Skill
+        skillUpdate(code: String!, type: String!, name: String!, description: String!, tools: [String!]): Skill
         skillRemove(code: String!): Skill
         `,
 

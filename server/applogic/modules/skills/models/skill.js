@@ -29,6 +29,10 @@ let SkillSchema = new Schema({
         type: String,
         trim: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     tools: [{ type: Number, ref: "Tool", default: [] }],
     metadata: {}
 

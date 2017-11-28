@@ -29,12 +29,20 @@ module.exports = {
                 let filter = {};
                 let query = Cv.find(filter)
                     .populate("skills")
+                    .populate({
+                        path: "skills",
+                        populate: { path: "tools", model: "Tool" }
+                    })
                     .populate("experiences")
                     .populate({
                         path: "experiences",
                         populate: { path: "tools", model: "Tool" }
                     })
                     .populate("formations")
+                    .populate({
+                        path: "formations",
+                        populate: { path: "tools", model: "Tool" }
+                    })
                     ;
 
                 return ctx.queryPageSort(query).exec().then( (docs) => {

@@ -22,7 +22,18 @@
     export default {
         name: "experience",
         components: { Tool },
-        props: ["thumbnailUrl", "linkUrl", "business", "position", "description", "startedAt", "endedAt", "tools", "dateformat", "isLast"],
+        props: {
+            thumbnailUrl: String,
+            linkUrl: String,
+            business: String,
+            position: String,
+            description: String,
+            startedAt: String,
+            endedAt: String,
+            tools: null,
+            dateformat: String,
+            isLast: Boolean,
+        },
         data () {
             return {
                 moment: moment
@@ -51,6 +62,9 @@
             margin: 0;
 
             img {
+                width: 1.8em;
+                height: 1.8em;
+                margin: 0 .4em;
                 padding: 0;
             }
         }

@@ -13,10 +13,12 @@
                     ul
                         li.row(v-for="(skillType, index) in cv.skills")
                             .col-sm-12
-                                h5 Compétences {{ index }}
+                                h5 Compétences {{ skillNameOfType(index) }}
                                 ul
                                     li(v-for="skill in skillType")
-                                        p {{ skill.name }}
+                                        p {{ skill.name }}: {{ skill.description }}.
+                                        ul
+                                            tool(v-for="(tool, toolIndex) in skill.tools" v-bind:key="toolIndex" v-bind="tool")
                 section
                     h4 Parcours professionnel
                     ul
@@ -61,10 +63,10 @@
 
     import {Tabs, Tab} from "vue-tabs-component";
     import Experience from "../components/experience";
-
+    import Tool from "../components/tool";
 
     export default {
-        components: { Experience, Tabs, Tab },
+        components: { Experience, Tool, Tabs, Tab },
         computed: {
             ...mapGetters("cvs", [
                 "cvs"
@@ -81,6 +83,11 @@
             ...mapActions("cvs", [
                 "downloadCvs",
             ]),
+            skillNameOfType: function(type) {
+                if (type == "technical")
+                    return "techniques";
+                return type;
+            },
             tabIconOf: function(cv) {
                 let awesomeIcon = "question";
                 if (cv.thumbnailUrl) {
@@ -243,10 +250,12 @@
             border-bottom: 1px #ccc solid !important;
         }
 
-
-
         section:last-of-type {
             border-bottom: 1px #ccc solid !important;
+        }
+
+        h5 {
+            font-weight: bold;
         }
 
         .contact {

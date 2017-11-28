@@ -28,7 +28,11 @@ module.exports = {
             {
                 title: _("Name"),
                 field: "Name"
-            }
+            },
+            {
+                title: _("Description"),
+                field: "Description"
+            },
         ],
         rowClasses: function(model) {
             return {
@@ -69,6 +73,15 @@ module.exports = {
                 label: _("Name"),
                 model: "name",
                 placeholder: _("SkillName"),
+                required: true,
+                validator: validators.string
+            },
+            {
+                type: "input",
+                inputType: "text",
+                label: _("Description"),
+                model: "description",
+                placeholder: _("SkillDescription"),
                 required: true,
                 validator: validators.string
             },
