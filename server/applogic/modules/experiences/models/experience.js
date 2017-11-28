@@ -25,8 +25,13 @@ let ExperienceSchema = new Schema({
         type: String,
         trim: true
     },
-    tags: {
-        type: [String]
+    thumbnailUrl: {
+        type: String,
+        trim: true
+    },
+    linkUrl: {
+        type: String,
+        trim: true
     },
     position: {
         type: String,
@@ -45,6 +50,8 @@ let ExperienceSchema = new Schema({
         type: Date,   
         default: Date.now
     },
+    skills: [{ type: Number, ref: "Skill", default: [] }],
+    tools: [{ type: Number, ref: "Tool", default: [] }],
     status: { type: Number, default: 0 },
     metadata: {}
 

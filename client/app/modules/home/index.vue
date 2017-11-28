@@ -2,35 +2,30 @@
     .container
         tabs(:options="{ useUrlFragment: false }")
             tab.cv(v-for="cv in cvs" v-bind:key="cv.tag" v-bind:name="cv.title" v-bind:prefix="tabIconOf(cv)")
-                .row.is-flex.border-top
+                .is-flex.border-top
                     .col-sm-3.border-left.border-right.text-center
                         img.logo.img-fluid(src="app/images/niji.jpg" alt="Niji")
                     .col-sm-9.text-center.border-right
-                        h2(style="margin: 8px;") {{ cv.name }}
-                        h3(style="margin: 8px;") {{ cv.title }}
+                        h2 {{ cv.name }}
+                        h3 {{ cv.title }}
                 section
-                    h4.border Synthèse
-                section
-                    h4.border Parcours professionnel
+                    h4 Synthèse
                     ul
-                        li.row.experience(v-for="xp in cv.experiences")
-                            .col-sm-2
-                                b {{ moment(xp.startedAt).format("MMM YYYY") }} à
-                                    br
-                                    | {{ moment(xp.endedAt).format("MMM YYYY") }}
-                                p (soit {{ moment.duration(moment(xp.endedAt).diff(moment(xp.startedAt))).humanize() }})
-                            .col-sm-10
-                                h5
-                                    img.img-thumbnail(src="https://pbs.twimg.com/profile_images/846988540676329472/4Q63bjW1.jpg" v-bind:alt="xp.business")
-                                    | {{ xp.business }} - {{ xp.position }}
-                                p {{ xp.description }}
+                        li.row(v-for="(skillType, index) in cv.skills")
+                            .col-sm-12
+                                h5 Compétences {{ index }}
+                                ul
+                                    li(v-for="skill in skillType")
+                                        p {{ skill.name }}
                 section
-                    h4.border Formations
+                    h4 Parcours professionnel
                     ul
-                        li.row.formation()
-                            .col-sm-2
-                            .col-sm-10
-                hr
+                        experience(v-for="(xp, index) in cv.experiences" v-bind:key="index" v-bind="xp" v-bind:dateformat="\"MMM YYYY\"" v-bind:is-last="index == cv.experiences.length - 1")
+                section
+                    h4 Formations
+                    ul
+                        experience(v-for="(xp, index) in cv.formations" v-bind:key="index" v-bind="xp" v-bind:dateformat="\"YYYY\"" v-bind:is-last="index == cv.formations.length - 1")
+                br
                 ul.contact
                     li
                         | 38ter, rue de Rennes - 35510 Cesson-Sévigné - 
@@ -63,35 +58,37 @@
     import Vue from "vue";
     import toast from "../../core/toastr";
     import { mapGetters, mapActions } from "vuex";
-    import moment from "moment";
 
     import {Tabs, Tab} from "vue-tabs-component";
+    import Experience from "../components/experience";
 
-    Vue.component("tabs", Tabs);
-    Vue.component("tab", Tab);
-    moment.locale('fr');
 
     export default {
+        components: { Experience, Tabs, Tab },
         computed: {
             ...mapGetters("cvs", [
                 "cvs"
             ]),
-
         },
         /**
          * Set page schema as data property
          */
         data() {
             return {
-                moment: moment
             };
         },
         methods: {
             ...mapActions("cvs", [
-                "downloadRows",
+                "downloadCvs",
             ]),
             tabIconOf: function(cv) {
-                let awesomeIcon = "android";
+                let awesomeIcon = "question";
+                if (cv.thumbnailUrl) {
+                    if (cv.thumbnailUrl.startsWith("http"))
+                        return "<img class=\"img-thumbnail\" src=\"" + cv.thumbnailUrl + "\" alt=\"\"/>";
+                    awesomeIcon = cv.thumbnailUrl;
+                }
+
                 return "<i class=\"fa fa-" + awesomeIcon + " fa-lg\"></i>";
             }
         },
@@ -100,7 +97,7 @@
          */
         created() {
             // Download rows for the page
-            this.downloadRows();
+            this.downloadCvs();
         }
     };
 </script>
@@ -109,104 +106,8 @@
     @import "../../../scss/themes/blurred/variables";
     @import "~bootstrap/scss/bootstrap";
 
-    .container {
-
-        .cv {
-            background-color: #fff;
-            color: black;
-
-            .logo {
-              max-height: 120px;
-              margin: 16px 26px 26px 26px;
-            }
-
-            .row.is-flex {
-                display: flex;
-                flex-wrap: wrap;
-                align-items: center;
-            }
-
-            .row.is-flex > [class*='col-'] {
-                display: flex;
-                flex-direction: column;
-            }
-
-            /*
-            * And with max cross-browser enabled.
-            * Nobody should ever write this by hand. 
-            * Use a preprocesser with autoprefixing.
-            */
-            .row.is-flex {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-flex-wrap: wrap;
-                -ms-flex-wrap: wrap;
-                flex-wrap: wrap;
-            }
-
-            .row.is-flex > div {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-orient: vertical;
-                -webkit-box-direction: normal;
-                -webkit-flex-direction: column;
-                -ms-flex-direction: column;
-                flex-direction: column;
-                vertical-align: middle;
-            }
-
-            section > h4 {
-              background-color: #dadfe2;
-              padding: 16px 32px;
-            }
-
-            section:nth-of-type(1) > h4 {
-                margin-top: 0px;
-            }
-
-            h5 {
-                padding: 0;
-                font-weight: bold;
-                margin: 0;
-                img {
-                    width: 1.8em;
-                    height: 1.8em;
-                    margin: 0 .4em;
-                }
-
-            }
-
-            .contact {
-                li {
-                    list-style: none;
-                    text-align: center;
-                }
-            }
-        }
-
-        .border {
-          border: 1px #ccc solid !important;
-        }
-
-        .border-left {
-          border-left: 1px #ccc solid !important;
-        }
-
-        .border-right {
-          border-right: 1px #ccc solid !important;
-        }
-
-        .border-top {
-          border-top: 1px #ccc solid !important;
-        }
-    }
-    
     .tabs-component {
-        margin: 2em 0;
+        margin: 1.2em 0;
     }
 
     .tabs-component-tabs {
@@ -274,6 +175,10 @@
         }
     }
 
+    .tabs-component-tab-a:hover {
+        text-decoration: none;
+    }
+
     .tabs-component-panels {
         padding: 2em 0;
     }
@@ -286,6 +191,71 @@
             border-radius: 0 6px 6px 6px;
             box-shadow: 0 0 10px rgba(0, 0, 0, .05);
             padding: 2em 2em;
+        }
+    }
+
+    .is-flex {
+        display: flex;
+    }
+
+    .is-flex > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* center items horizontally, in this case */
+        align-items: center;
+    }
+
+    .cv {
+        background-color: #fff;
+        color: black;
+
+        .border {
+          border: 1px #ccc solid !important;
+        }
+
+        .border-left {
+          border-left: 1px #ccc solid !important;
+        }
+
+        .border-right {
+          border-right: 1px #ccc solid !important;
+        }
+
+        .border-top {
+          border-top: 1px #ccc solid !important;
+        }
+
+        .logo {
+          max-height: 120px;
+          margin: 16px 26px 26px 26px;
+        }
+
+        section > * {
+            border-left: 1px #ccc solid !important;
+            border-right: 1px #ccc solid !important;
+            padding: .4em 1.2em;
+            margin: 0;
+        }
+
+        section > h4 {
+            background-color: #dadfe2;
+            border-top: 1px #ccc solid !important;
+            border-bottom: 1px #ccc solid !important;
+        }
+
+
+
+        section:last-of-type {
+            border-bottom: 1px #ccc solid !important;
+        }
+
+        .contact {
+            margin: 0;
+
+            li {
+                list-style: none;
+                text-align: center;
+            }
         }
     }
 

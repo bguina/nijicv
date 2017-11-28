@@ -33,21 +33,13 @@ let CvSchema = new Schema({
         type: String,
         trim: true
     },
-    tag:  {
-        type: String,
-        default: "",
-        trim: true
-    },
+    skills: [{ type: Number, ref: "Skill", default: [] }],
+    experiences: [{ type: Number, ref: "Experience", default: [] }],
+    formations: [{ type: Number, ref: "Experience", default: [] }],
     status: { type: Number, default: 0 },
     metadata: {}
 
 }, schemaOptions);
-
-CvSchema.virtual("experiences", {
-    ref: "Experience", // The model to use
-    localField: "tag", // Find people where `localField`
-    foreignField: "tags", // is equal to `foreignField`
-});
 
 CvSchema.virtual("code").get(function() {
     return this.encodeID();

@@ -13,7 +13,7 @@ export const clearSelection = ({ commit }) => {
     commit(CLEAR_SELECT);
 };
 
-export const downloadRows = ({ commit }) => {
+export const downloadExperiences = ({ commit }) => {
     axios.get(NAMESPACE).then((response) => {
         let res = response.data;
         if (res.status == 200 && res.data)

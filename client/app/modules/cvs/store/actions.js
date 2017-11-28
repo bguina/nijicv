@@ -2,6 +2,7 @@ import Vue from "vue";
 import toastr from "../../../core/toastr";
 import { LOAD, ADD, SELECT, CLEAR_SELECT, UPDATE, REMOVE } from "./types";
 import axios from "axios";
+import _ from "lodash";
 
 export const NAMESPACE = "/api/cvs";
 
@@ -13,12 +14,27 @@ export const clearSelection = ({ commit }) => {
     commit(CLEAR_SELECT);
 };
 
-export const downloadRows = ({ commit }) => {
+export const downloadCvs = ({ commit }) => {
     axios.get(NAMESPACE).then((response) => {
+        console.log("got cvs: "+JSON.stringify(response));
         let res = response.data;
-        if (res.status == 200 && res.data)
+        if (res.status == 200 && res.data) {
+
+            for (let cv of res.data) {
+                let dict = {};
+
+                for (let skill of cv.skills) {
+                    if (!dict[skill.type])
+                        dict[skill.type] = [skill];
+                    else
+                        dict[skill.type].push(skill);
+                }
+
+                cv.skills = dict;
+            }
+
             commit(LOAD, res.data);
-        else
+        } else
             console.error("Request error!", res.error);
     }).catch((response) => {
         console.error("Request error!", response.statusText);

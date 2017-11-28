@@ -12,14 +12,28 @@
                 router-link(tag="li", to="/cv")
                     a(:title="_('Cv')")
                         span.icon
-                            i.fa.fa-tasks
+                            i.fa.fa-file-code-o
                         span.label {{ "Cv" | i18n }}
 
                 router-link(tag="li", to="/experiences")
                     a(:title="_('Experiences')")
                         span.icon
-                            i.fa.fa-tasks
+                            i.fa.fa-film
                         span.label {{ "Experiences" | i18n }}
+
+                router-link(tag="li", to="/skills")
+                    a(:title="_('Skills')")
+                        span.icon
+                            i.fa.fa-rocket
+                        span.label {{ "Skills" | i18n }}
+
+                router-link(tag="li", to="/tools")
+                    a(:title="_('Tools')")
+                        span.icon
+                            i.fa.fa-cogs
+                        span.label {{ "Tools" | i18n }}
+
+                // .fa-graduation-cap
 
             .title {{ "Profile" | i18n }}
             ul

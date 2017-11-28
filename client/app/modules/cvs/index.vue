@@ -6,7 +6,7 @@
     import Vue from "vue";
     import jquery from "jquery";
     import AdminPage from "../../core/DefaultAdminPage.vue";
-    import schema from "./schemaCv";
+    import schema from "./schema";
     import toast from "../../core/toastr";
     import { mapGetters, mapActions } from "vuex";
     export default {
@@ -60,7 +60,7 @@
         },      
         methods: {
             ...mapActions("cvs", [
-                "downloadRows",
+                "downloadCvs",
                 "created",
                 "updated",
                 "removed",
@@ -76,7 +76,7 @@
          */
         created() {
             // Download rows for the page
-            this.downloadRows();
+            this.downloadCvs();
         }
     };
 </script>

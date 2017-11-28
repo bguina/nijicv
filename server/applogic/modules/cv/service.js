@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Cv,
-        modelPropFilter: "code name title thumbnailUrl tag status experiences"
+        modelPropFilter: "code name title thumbnailUrl status skills experiences formations"
     },
     
     actions: {
@@ -27,7 +27,15 @@ module.exports = {
             cache: true,
             handler(ctx) {
                 let filter = {};
-                let query = Cv.find(filter).sort({ tag: 1 }).populate("experiences");
+                let query = Cv.find(filter)
+                    .populate("skills")
+                    .populate("experiences")
+                    .populate({
+                        path: "experiences",
+                        populate: { path: "tools", model: "Tool" }
+                    })
+                    .populate("formations")
+                    ;
 
                 return ctx.queryPageSort(query).exec().then( (docs) => {
                     return this.toJSON(docs);
@@ -52,7 +60,7 @@ module.exports = {
                 title: ctx.params.title,
                 thumbnailUrl: ctx.params.thumbnailUrl,
                 tag: ctx.params.tag,
-                status: ctx.params.status
+                status: ctx.params.status,
             });
 
             return cv.save()
@@ -84,11 +92,32 @@ module.exports = {
                 if (ctx.params.thumbnailUrl != null)
                     doc.thumbnailUrl = ctx.params.thumbnailUrl;
                 
-                if (ctx.params.tag != null)
-                    doc.tag = ctx.params.tag;
-
                 if (ctx.params.status != null)
                     doc.status = ctx.params.status;
+
+                if (ctx.params.skills != null) {
+                    if (1 == ctx.params.experiences.length) {
+                        doc.skills = ctx.params.skills[0].split(",");
+                    } else {
+                        doc.skills = ctx.params.skills;
+                    }
+                }
+
+                if (ctx.params.experiences != null) {
+                    if (1 == ctx.params.experiences.length) {
+                        doc.experiences = ctx.params.experiences[0].split(",");
+                    } else {
+                        doc.experiences = ctx.params.experiences;
+                    }
+                }
+
+                if (ctx.params.formations != null) {
+                    if (1 == ctx.params.experiences.length) {
+                        doc.formations = ctx.params.formations[0].split(",");
+                    } else {
+                        doc.formations = ctx.params.formations;
+                    }
+                }
 
                 return doc.save();
             })
@@ -161,15 +190,17 @@ module.exports = {
         type Cv {
             name: String!
             title: String!
-            tag: String
             thumbnailUrl: String!
             status: Int
+            skills: [String!]
+            experiences: [String!]
+            formations: [String!]
         }
         `,
 
         mutation: `
         cvCreate(name: String!, title: String!, tag: String, thumbnailUrl: String!, status: Int): Cv
-        cvUpdate(code: String!, name: String!, title: String!, tag: String, thumbnailUrl: String!, status: Int): Cv
+        cvUpdate(code: String!, name: String!, title: String!, tag: String, thumbnailUrl: String!, status: Int, skills: [String!], experiences: [String!], formations: [String!]): Cv
         cvRemove(code: String!): Cv
         `,
 

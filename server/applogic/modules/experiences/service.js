@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Experience,
-        modelPropFilter: "code business tags position description startedAt endedAt"
+        modelPropFilter: "code business thumbnailUrl linkUrl position description startedAt endedAt skills tools"
     },
     
     actions: {
@@ -27,7 +27,10 @@ module.exports = {
             cache: true,
             handler(ctx) {
                 let filter = {};
-                let query = Experience.find(filter);
+                let query = Experience.find(filter)
+                    .populate("skills")
+                    .populate("tools")
+                    ;
 
                 return ctx.queryPageSort(query).exec().then( (docs) => {
                     return this.toJSON(docs);
@@ -49,12 +52,13 @@ module.exports = {
             
             let experience = new Experience({
                 business: ctx.params.business,
-                tags: ctx.params.tags,
+                thumbnailUrl: ctx.params.thumbnailUrl,
+                linkUrl: ctx.params.thumbnailUrl,
                 position: ctx.params.position,
                 description: ctx.params.description,
                 startedAt: ctx.params.startedAt,
                 endedAt: ctx.params.endedAt,
-                status: ctx.params.status
+                status: ctx.params.status,
             });
 
             return experience.save()
@@ -80,13 +84,11 @@ module.exports = {
                 if (ctx.params.business != null)
                     doc.business = ctx.params.business;
 
-                if (ctx.params.tags != null) {
-                    if (1 == ctx.params.tags.length) {
-                        doc.tags = ctx.params.tags[0].split(",");
-                    } else {
-                        doc.tags = ctx.params.tags;
-                    }
-                }
+                if (ctx.params.thumbnailUrl != null)
+                    doc.thumbnailUrl = ctx.params.thumbnailUrl;
+
+                if (ctx.params.linkUrl != null)
+                    doc.thumbnailUrl = ctx.params.linkUrl;
 
                 if (ctx.params.position != null)
                     doc.position = ctx.params.position;
@@ -102,6 +104,22 @@ module.exports = {
 
                 if (ctx.params.status != null)
                     doc.status = ctx.params.status;
+
+                if (ctx.params.skills != null) {
+                    if (1 == ctx.params.skills.length) {
+                        doc.skills = ctx.params.skills[0].split(",");
+                    } else {
+                        doc.skills = ctx.params.skills;
+                    }
+                }
+
+                if (ctx.params.tools != null) {
+                    if (1 == ctx.params.tools.length) {
+                        doc.tools = ctx.params.tools[0].split(",");
+                    } else {
+                        doc.tools = ctx.params.tools;
+                    }
+                }
 
                 return doc.save();
             })
@@ -142,7 +160,8 @@ module.exports = {
         */
         validateParams(ctx, strictMode) {
             ctx.validateParam("business").trim().notEmpty(ctx.t("app:ExperienceBusinessCannotBeBlank")).end();
-            ctx.validateParam("tags").notEmpty(ctx.t("app:ExperienceTagsCannotBeEmpty")).end();
+            ctx.validateParam("thumbnailUrl").trim().notEmpty(ctx.t("app:ExperienceThumbnailUrlCannotBeBlank")).end();
+            ctx.validateParam("linkUrl").trim().notEmpty(ctx.t("app:ExperienceLinkUrlCannotBeBlank")).end();
             ctx.validateParam("position").trim().notEmpty(ctx.t("app:ExperiencePositionCannotBeBlank")).end();
             ctx.validateParam("description").trim().notEmpty(ctx.t("app:ExperienceDescriptionCannotBeBlank")).end();
             ctx.validateParam("startedAt").trim().notEmpty(ctx.t("app:ExperienceStartedAtCannotBeBlank")).end();
@@ -174,17 +193,19 @@ module.exports = {
         types: `
         type Experience {
             business: String!
-            tags: [String]
+            thumbnailUrl: String!
             position: String!
             description: String!
             startedAt: String!
             endedAt: String!
+            skills: [String!]
+            tools: [String!]
         }
         `,
 
         mutation: `
-        experienceCreate(business: String!, tags: [String!]!, position: String!, description: String!, startedAt: String!, endedAt: String!): Experience
-        experienceUpdate(code: String!, business: String!, tags: [String!]!, position: String!, description: String!, startedAt: String!, endedAt: String!): Experience
+        experienceCreate(business: String!, thumbnailUrl: String!,position: String!, description: String!, startedAt: String!, endedAt: String!): Experience
+        experienceUpdate(code: String!, business: String!, thumbnailUrl: String!,position: String!, description: String!, startedAt: String!, endedAt: String!, skills: [String!], tools: [String!]): Experience
         experienceRemove(code: String!): Experience
         `,
 
