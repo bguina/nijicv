@@ -21,21 +21,25 @@ let schemaOptions = {
 };
 
 let CvSchema = new Schema({
-    name: {
-        type: String,
-        trim: true
+    ownerId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
+    },
+    ownerName: {
+        type:String,
+        trim:true
     },
     title: {
         type: String,
         trim: true
     },
-    thumbnailUrl: {
+    icon: {
         type: String,
         trim: true
     },
-    skills: [{ type: Number, ref: "Skill", default: [] }],
-    experiences: [{ type: Number, ref: "Experience", default: [] }],
-    formations: [{ type: Number, ref: "Experience", default: [] }],
+    skills: [{ type: Schema.Types.ObjectId, ref: "Skill", default: [] }],
+    experiences: [{ type: Schema.Types.ObjectId, ref: "Experience", default: [] }],
+    formations: [{ type: Schema.Types.ObjectId, ref: "Experience", default: [] }],
     status: { type: Number, default: 0 },
     metadata: {}
 

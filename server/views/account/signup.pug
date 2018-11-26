@@ -15,8 +15,13 @@ block content
 
 					header= t("SignUp")
 					.form-group
-						label(for='name')= t("NameSC")
-						input(type='text', name='name', id='name', placeholder=t("YourName"), autofocus=true, required)
+						label(for='firstName')= t("FirstNameSC")
+						input(type='text', name='firstName', id='firstName', placeholder=t("YourFirstName"), autofocus=true, required)
+						.hint
+					.form-group
+						label(for='lastName')= t("LastNameSC")
+						input(type='text', name='lastName', id='lastName', placeholder=t("YourLastName"), required)
+						.hint
 					.form-group
 						label(for='email')= t("EmailSC")
 						input(type='email', name='email', id='email', placeholder=t("YourEmail"), required)
@@ -25,7 +30,8 @@ block content
 						label(for='username')= t("UsernameSC")
 						input(type='text', name='username', id='username', placeholder=t("YourUsername"))
 						.hint
-					.form-group.switch
+					
+					.form-group.switch(style="visibility: none;")
 						div= t("PasswordlessAccount")
 						input(type='checkbox', name='passwordless', id='passwordless')
 						label(for='passwordless')

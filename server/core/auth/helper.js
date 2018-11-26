@@ -214,7 +214,8 @@ module.exports.linkToSocialAccount = function linkToSocialAccount(opts) {
 
                 // Create a new user according to social profile
                 let user = new User();
-                user.fullName = userData.name;
+                user.firstName = userData.name;
+                user.lastName = userData.name;
                 user.email = email;
                 user.username = email; // username will be the e-mail address if signup with a social account. Because maybe conflict other exist user's username
                 user.provider = provider;

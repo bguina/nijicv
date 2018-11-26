@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Tool,
-        modelPropFilter: "thumbnailUrl linkUrl name"
+        modelPropFilter: "icon linkUrl name"
     },
     
     actions: {
@@ -48,7 +48,7 @@ module.exports = {
             this.validateParams(ctx, true);
             
             let tool = new Tool({
-                thumbnailUrl: ctx.params.thumbnailUrl,
+                icon: ctx.params.icon,
                 linkUrl: ctx.params.linkUrl,
                 name: ctx.params.name,
             });
@@ -73,8 +73,8 @@ module.exports = {
             return this.collection.findById(ctx.modelID).exec()
             .then((doc) => {
 
-                if (ctx.params.thumbnailUrl != null)
-                    doc.type = ctx.params.thumbnailUrl;
+                if (ctx.params.icon != null)
+                    doc.type = ctx.params.icon;
 
                 if (ctx.params.linkUrl != null)
                     doc.type = ctx.params.linkUrl;
@@ -120,7 +120,7 @@ module.exports = {
         * @param {boolean} strictMode       strictMode. If true, need to exists the required parameters
         */
         validateParams(ctx, strictMode) {
-            ctx.validateParam("thumbnailUrl").trim().notEmpty(ctx.t("app:ToolThumbnailUrlCannotBeBlank")).end();
+            ctx.validateParam("icon").trim().notEmpty(ctx.t("app:ToolThumbnailUrlCannotBeBlank")).end();
             ctx.validateParam("linkUrl").trim().notEmpty(ctx.t("app:ToolLinkUrlCannotBeBlank")).end();
             ctx.validateParam("name").trim().notEmpty(ctx.t("app:ToolNameCannotBeBlank")).end();
 
@@ -148,14 +148,14 @@ module.exports = {
 
         types: `
         type Tool {
-            thumbnailUrl: String!
+            icon: String!
             name: String!
         }
         `,
 
         mutation: `
-        toolCreate(thumbnailUrl: String!, name: String!): Tool
-        toolUpdate(code: String!, thumbnailUrl: String!, name: String!): Tool
+        toolCreate(icon: String!, name: String!): Tool
+        toolUpdate(code: String!, icon: String!, name: String!): Tool
         toolRemove(code: String!): Tool
         `,
 

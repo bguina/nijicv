@@ -10,7 +10,7 @@ let Skill  = require("./models/skill");
 
 module.exports = {
     settings: {
-        name: "skills",
+        name: "skill",
         version: 1,
         namespace: "skills",
         rest: true,

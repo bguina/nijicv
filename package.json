@@ -1,7 +1,7 @@
 {
   "name": "niji-cv-bguina",
   "version": "0.9.0",
-  "title": "CV Niji - Benoit Guina",
+  "title": "Niji CV",
   "description": "",
   "main": "server/index.js",
   "scripts": {
@@ -101,6 +101,7 @@
     "socket.io": "2.0.2",
     "socket.io-client": "2.0.2",
     "uuid-token-generator": "1.0.0",
+    "vfg-field-array": "0.0.1",
     "vue-awesome": "^2.3.4",
     "vue-bootstrap-datetimepicker": "^4.1.0",
     "vue-momentjs": "^0.1.1",

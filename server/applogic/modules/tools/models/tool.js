@@ -21,7 +21,7 @@ let schemaOptions = {
 };
 
 let ToolSchema = new Schema({
-    thumbnailUrl: {
+    icon: {
         type: String,
         trim: true
     },

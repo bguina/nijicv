@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Experience,
-        modelPropFilter: "code business thumbnailUrl linkUrl position description startedAt endedAt skills tools"
+        modelPropFilter: "code business icon linkUrl position description startedAt endedAt skills tools"
     },
     
     actions: {
@@ -52,8 +52,8 @@ module.exports = {
             
             let experience = new Experience({
                 business: ctx.params.business,
-                thumbnailUrl: ctx.params.thumbnailUrl,
-                linkUrl: ctx.params.thumbnailUrl,
+                icon: ctx.params.icon,
+                linkUrl: ctx.params.icon,
                 position: ctx.params.position,
                 description: ctx.params.description,
                 startedAt: ctx.params.startedAt,
@@ -84,11 +84,11 @@ module.exports = {
                 if (ctx.params.business != null)
                     doc.business = ctx.params.business;
 
-                if (ctx.params.thumbnailUrl != null)
-                    doc.thumbnailUrl = ctx.params.thumbnailUrl;
+                if (ctx.params.icon != null)
+                    doc.icon = ctx.params.icon;
 
                 if (ctx.params.linkUrl != null)
-                    doc.thumbnailUrl = ctx.params.linkUrl;
+                    doc.linkUrl = ctx.params.linkUrl;
 
                 if (ctx.params.position != null)
                     doc.position = ctx.params.position;
@@ -160,7 +160,7 @@ module.exports = {
         */
         validateParams(ctx, strictMode) {
             ctx.validateParam("business").trim().notEmpty(ctx.t("app:ExperienceBusinessCannotBeBlank")).end();
-            ctx.validateParam("thumbnailUrl").trim().notEmpty(ctx.t("app:ExperienceThumbnailUrlCannotBeBlank")).end();
+            ctx.validateParam("icon").trim().notEmpty(ctx.t("app:ExperienceThumbnailUrlCannotBeBlank")).end();
             ctx.validateParam("linkUrl").trim().notEmpty(ctx.t("app:ExperienceLinkUrlCannotBeBlank")).end();
             ctx.validateParam("position").trim().notEmpty(ctx.t("app:ExperiencePositionCannotBeBlank")).end();
             ctx.validateParam("description").trim().notEmpty(ctx.t("app:ExperienceDescriptionCannotBeBlank")).end();
@@ -193,7 +193,7 @@ module.exports = {
         types: `
         type Experience {
             business: String!
-            thumbnailUrl: String!
+            icon: String!
             position: String!
             description: String!
             startedAt: String!
@@ -204,8 +204,8 @@ module.exports = {
         `,
 
         mutation: `
-        experienceCreate(business: String!, thumbnailUrl: String!,position: String!, description: String!, startedAt: String!, endedAt: String!): Experience
-        experienceUpdate(code: String!, business: String!, thumbnailUrl: String!,position: String!, description: String!, startedAt: String!, endedAt: String!, skills: [String!], tools: [String!]): Experience
+        experienceCreate(business: String!, icon: String!,position: String!, description: String!, startedAt: String!, endedAt: String!): Experience
+        experienceUpdate(code: String!, business: String!, icon: String!,position: String!, description: String!, startedAt: String!, endedAt: String!, skills: [String!], tools: [String!]): Experience
         experienceRemove(code: String!): Experience
         `,
 

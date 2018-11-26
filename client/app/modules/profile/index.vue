@@ -4,13 +4,13 @@
             img.avatar(:src="profile.avatar")
             
             .details.flex-item-1
-                .name {{ profile.fullName }}
+                .name {{ profile.firstName }}
                     span.text-muted.username ({{ profile.username }})
 
-                .tags
-                    .tag.primary !Role name!
-                    .tag.danger !Administrator!
-                    .tag.success !Online!
+                //.tags
+                //    .tag.primary !Role name!
+                //    .tag.danger !Administrator!
+                //    .tag.success !Online!
 
                 .description
                     .info-row(v-if="profile.profile && profile.profile.location")
@@ -28,7 +28,7 @@
                         span.value {{ profile.createdAt | ago }}                            
 
                 hr.full
-        pre(v-html="this.$options.filters.prettyJSON(profile)")
+        //pre(v-html="this.$options.filters.prettyJSON(profile)")
 
 </template>
 

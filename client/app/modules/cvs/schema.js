@@ -14,14 +14,14 @@ module.exports = {
     table: {
         multiSelect: true,
         columns: [
-            {
+/*            {
                 title: _("ID"),
                 field: "code",
                 align: "left",
                 formatter(value, model) {
                     return model ? model.code : "";
                 }
-            },
+            },*/
             {
                 title: _("Status"),
                 field: "status",
@@ -150,3 +150,4 @@ module.exports = {
     }
 
 };
+

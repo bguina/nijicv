@@ -20,7 +20,7 @@ module.exports = {
         role: "user",
         collection: User,
 
-        modelPropFilter: "code username fullName email avatar passwordLess provider profile socialLinks roles apiKey lastLogin locale status createdAt updatedAt"
+        modelPropFilter: "code username firstName lastName email avatar passwordLess provider profile socialLinks roles apiKey lastLogin locale status createdAt updatedAt"
     },
     
     actions: {
@@ -50,7 +50,8 @@ module.exports = {
         types: `
             type Profile {
                 code: String!
-                fullName: String
+                firstName: String
+                lastName: String
                 email: String
                 username: String
                 passwordLess: Boolean
@@ -108,7 +109,8 @@ query getPerson {
 
 fragment personFields on Person {
   code
-  fullName
+  firstName
+  lastName
   email
   username
   roles

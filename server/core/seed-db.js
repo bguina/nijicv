@@ -21,8 +21,9 @@ module.exports = function() {
             let users = [];
 
             let admin = new User({
-                fullName: "Administrator",
-                email: "admin@boilerplate-app.com",
+                firstName: "Admin",
+                lastName: "isTraitor",
+                email: "benoit.guina@niji.fr",
                 username: "admin",
                 password: "admin1234",
                 provider: "local",
@@ -32,8 +33,9 @@ module.exports = function() {
             users.push(admin.save());
 
             let test = new User({
-                fullName: "Test User",
-                email: "test@boilerplate-app.com",
+                firstName: "Test",
+                lastName: "User",
+                email: "benoit.guina@gmail.fr",
                 username: "test",
                 password: "test1234",
                 provider: "local",
@@ -50,7 +52,8 @@ module.exports = function() {
                     return Promise.all(_.times(10, () => {
                         let fakeUser = fakerator.entity.user();
                         let user = new User({
-                            fullName: fakeUser.firstName + " " + fakeUser.lastName,
+                            firstName: fakeUser.firstName,
+                            lastName: fakeUser.lastName,
                             email: fakeUser.email,
                             username: fakeUser.userName,
                             password: fakeUser.password,

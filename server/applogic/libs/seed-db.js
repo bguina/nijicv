@@ -24,101 +24,116 @@ module.exports = function() {
 
 
             let shellTool = new Tool({
-                thumbnailUrl: "https://301o583r8shhildde3s0vcnh-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/Linux-Shell.png",
+                icon: "https://301o583r8shhildde3s0vcnh-wpengine.netdna-ssl.com/wp-content/uploads/2017/04/Linux-Shell.png",
                 linkUrl: "https://www.gnu.org/software/bash/",
                 name: "Shell UNIX",
             });
             let mongoTool = new Tool({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/750403034178478081/EPrK3ci2.jpg",
+                icon: "https://pbs.twimg.com/profile_images/750403034178478081/EPrK3ci2.jpg",
                 linkUrl: "https://www.mongodb.com/",
                 name: "MongoDB",
             });
             let sqlTool = new Tool({
-                thumbnailUrl: "https://webdevolutions.blob.core.windows.net/images/Media/Logos/Cloud/DevolutionsCloud-Database-Icon-MR.png",
+                icon: "https://webdevolutions.blob.core.windows.net/images/Media/Logos/Cloud/DevolutionsCloud-Database-Icon-MR.png",
                 name: "SQL",
             });
             let ionicTool = new Tool({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/834457277830541312/bYMCvtHD.jpg",
+                icon: "https://pbs.twimg.com/profile_images/834457277830541312/bYMCvtHD.jpg",
                 linkUrl: "https://ionicframework.com/",
                 name: "Ionic",
             });
             let androidTool = new Tool({
-                thumbnailUrl: "https://developer.android.com/studio/images/studio-icon.png",
+                icon: "https://developer.android.com/studio/images/studio-icon.png",
                 linkUrl: "https://developer.android.com/studio",
                 name: "Android Studio",
             });
             let kotlinTool = new Tool({
-                thumbnailUrl: "https://kotlinlang.org/assets/images/open-graph/kotlin_250x250.png",
+                icon: "https://kotlinlang.org/assets/images/open-graph/kotlin_250x250.png",
                 linkUrl: "https://kotlinlang.org/",
                 name: "Kotlin",
             });
             let reactTool = new Tool({
-                thumbnailUrl: "https://opbeat.com/images/stacks/logo_react.svg",
+                icon: "https://opbeat.com/images/stacks/logo_react.svg",
                 linkUrl: "https://reactjs.org/",
                 name: "React",
             });
             let cucumberTool = new Tool({
-                thumbnailUrl: "https://seeklogo.com/images/C/cucumber-logo-D727C551CE-seeklogo.com.png",
+                icon: "https://seeklogo.com/images/C/cucumber-logo-D727C551CE-seeklogo.com.png",
                 linkUrl: "https://cucumber.io/",
                 name: "Cucumber",
             });
             let calabashTool = new Tool({
-                thumbnailUrl: "https://seeklogo.com/images/C/cucumber-logo-D727C551CE-seeklogo.com.png",
+                icon: "https://seeklogo.com/images/C/cucumber-logo-D727C551CE-seeklogo.com.png",
                 linkUrl: "http://calaba.sh/",
                 name: "Calabash",
             });
+            let junitTool = new Tool({
+                icon: "http://junit.org/junit5/assets/img/junit5-logo.png",
+                linkUrl: "http://junit.org/junit5/",
+                name: "JUnit",
+            });
             let phpTool = new Tool({
-                thumbnailUrl: "https://avatars1.githubusercontent.com/u/25158?s=200",
+                icon: "https://avatars1.githubusercontent.com/u/25158?s=200",
                 linkUrl: "http://www.php.net/",
                 name: "PHP5",
             });
             let invisionTool = new Tool({
-                thumbnailUrl: "https://p4.zdassets.com/hc/theme_assets/604014/200095455/logo.jpg",
+                icon: "https://p4.zdassets.com/hc/theme_assets/604014/200095455/logo.jpg",
                 linkUrl: "https://www.invisionapp.com/",
                 name: "InVision",
             });
             let prestashopTool = new Tool({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/612974656958689280/C6U2rHtG.jpg",
+                icon: "https://pbs.twimg.com/profile_images/612974656958689280/C6U2rHtG.jpg",
                 linkUrl: "https://www.prestashop.com",
                 name: "Prestashop",
             });
             let cTool = new Tool({
-                thumbnailUrl: "https://www.javatpoint.com/cpages/images/c-programming.png",
+                icon: "https://www.javatpoint.com/cpages/images/c-programming.png",
                 name: "Langage C",
             });
             let cppTool = new Tool({
-                thumbnailUrl: "https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png",
+                icon: "https://raw.githubusercontent.com/isocpp/logos/master/cpp_logo.png",
                 name: "Langage C++",
             });
             let railsTool = new Tool({
-                thumbnailUrl: "https://seeklogo.com/images/R/ruby-logo-087AF79367-seeklogo.com.jpg",
+                icon: "https://seeklogo.com/images/R/ruby-logo-087AF79367-seeklogo.com.jpg",
                 linkUrl: "http://rubyonrails.org/",
                 name: "Ruby On Rails",
             });
             let pythonTool = new Tool({
-                thumbnailUrl: "https://www.python.org/static/opengraph-icon-200x200.png",
+                icon: "https://www.python.org/static/opengraph-icon-200x200.png",
                 linkUrl: "https://www.python.org/",
                 name: "Python 2.7-3.0",
             });
             let djangoTool = new Tool({
-                thumbnailUrl: "http://ztechnologie.com/blog/demarrer-un-projet-sous-django/django.png",
+                icon: "http://ztechnologie.com/blog/demarrer-un-projet-sous-django/django.png",
                 linkUrl: "https://www.djangoproject.com/",
                 name: "Django",
             });
             let javascriptTool = new Tool({
-                thumbnailUrl: "https://i.stack.imgur.com/Mmww2.png",
+                icon: "https://i.stack.imgur.com/Mmww2.png",
                 name: "Javascript",
             });
 
+            let archSkill = new Skill({
+                type: "métier",
+                name: "Architecture applicative",
+                description: "analyse des besoins, conception et découpage en briques logicielles"
+            });
             let codeSkill = new Skill({
                 type: "métier",
-                name: "Architecture et développement applicatif",
-                description: "analyse des besoins, découpage en composants fonctionnels, conception"
+                name: "Réalisation applicative",
+                description: "algorithmie, intelligence artificielle, réseau, 3d, ..."
             });
             let androidSkill = new Skill({
                 type: "technical",
-                name: "Mobile",
-                description: "expérience confirmé Android Java, Kotlin"
+                name: "Développement mobile",
+                description: "expérience confirmée en Android"
+            });
+            let androidTestingSkill = new Skill({
+                type: "technical",
+                name: "Testing",
+                description: "tests unitaires, tests comportementaux"
             });
             let testingSkill = new Skill({
                 type: "technical",
@@ -126,8 +141,8 @@ module.exports = function() {
                 description: "tests unitaires, tests comportementaux"
             });
             let xpDkt = new Experience({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/846988540676329472/4Q63bjW1.jpg",
                 linkUrl: "https://play.google.com/store/apps/details?id=com.decathlon.app",
+                icon: "https://pbs.twimg.com/profile_images/846988540676329472/4Q63bjW1.jpg",
                 business: "Decathlon",
                 position: "Développeur Android",
                 description: "Mission de développement de la nouvelle application grand-public, avec les évolutions nécessaires aux mises en production France, Hong-Kong et Italie.",
@@ -135,8 +150,8 @@ module.exports = function() {
                 endedAt: "2017-08-03T00:00:00+00:00",
             });
             let xpEqs = new Experience({
-                thumbnailUrl: "https://i0.wp.com/pegasebuzz.com/leblog/wp-content/uploads/2016/03/equisense-logo.jpg?fit=703%2C715&ssl=1",
                 linkUrl: "https://equisense.com/fr",
+                icon: "https://i0.wp.com/pegasebuzz.com/leblog/wp-content/uploads/2016/03/equisense-logo.jpg?fit=703%2C715&ssl=1",
                 business: "Equisense",
                 position: "Développeur Android",
                 description: "Développement de l’application de contrôle de la centrale inertielle Bluetooth « Motion » permettant l’analyse de la locomotion équine.",
@@ -145,8 +160,8 @@ module.exports = function() {
             });
 
             let xpPresta = new Experience({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/566230308328964096/leRiLPFp.png",
                 linkUrl: "https://lille.alerteapero.com/",
+                icon: "https://pbs.twimg.com/profile_images/566230308328964096/leRiLPFp.png",
                 business: "AlerteApero",
                 position: "Prestataire Auto-entrepreneur",
                 description: "Création d’un site-boutique livrable aux franchisés en collaboration avec Samuel Lemaresquier, web designer",
@@ -155,8 +170,8 @@ module.exports = function() {
             });
 
             let xpNeuf = new Experience({
-                thumbnailUrl: "https://pbs.twimg.com/profile_images/3224891044/fa7577ebe6973f19605a13f75ccd04a7_400x400.png",
                 linkUrl: "https://www.ubinect.fr/",
+                icon: "https://pbs.twimg.com/profile_images/3224891044/fa7577ebe6973f19605a13f75ccd04a7_400x400.png",
                 business: "9h37",
                 position: "Stagiaire Python",
                 description: "Développement d’un logiciel de télétransmission de données médicales opérable depuis tous les navigateurs web majeurs.",
@@ -164,8 +179,8 @@ module.exports = function() {
                 endedAt: "2013-07-01T00:00:00+00:00",
             });
             let xpEpitech = new Experience({
-                thumbnailUrl: "https://media-elerium.cursecdn.com/avatars/100/635/636316564390503229.png",
                 linkUrl: "http://www.epitech.eu/",
+                icon: "https://media-elerium.cursecdn.com/avatars/100/635/636316564390503229.png",
                 business: "EPITECH",
                 position: "Ecole d'expertise en informatique",
                 description: "",
@@ -173,21 +188,21 @@ module.exports = function() {
                 endedAt: "2015-10-01T00:00:00+00:00",
             });
             let cvAndroid = new Cv({
-                name: "Benoit Guina",
+                ownerId: null,
                 title: "Développeur Android",
-                thumbnailUrl: "android",
+                icon: "android",
                 status: 1
             });
             let cvWeb = new Cv({
-                name: "Benoit Guina",
+                ownerId: null,
                 title: "Développeur Web",
-                thumbnailUrl: "globe",
+                icon: "globe",
                 status: 1
             });
             let cv = new Cv({
-                name: "Benoit Guina",
+                ownerId: null,
                 title: "Développeur Software",
-                thumbnailUrl: "code-fork",
+                icon: "code-fork",
                 status: 1,
             });
 
@@ -201,6 +216,9 @@ module.exports = function() {
                 androidTool.save().then((value) => {
                     logger.info("Default android tool created:" + value);
                 }).catch((err) => { logger.error("Error creating android tool: " + err); }),
+                junitTool.save().then((value) => {
+                    logger.info("Default junit tool created:" + value);
+                }).catch((err) => { logger.error("Error creating junit tool: " + err); }),
                 kotlinTool.save().then((value) => {
                     logger.info("Default kotlin tool created:" + value);
                 }).catch((err) => { logger.error("Error creating kotlin tool: " + err); }),
@@ -240,12 +258,18 @@ module.exports = function() {
                 pythonTool.save().then((value) => {
                     logger.info("Default python tool created:" + value);
                 }).catch((err) => { logger.error("Error creating python tool: " + err); }),
+                archSkill.save().then((value) => {
+                    logger.info("Default arch skill created:" + value);
+                }).catch((err) => { logger.error("Error creating arch skill: " + err); }),
                 codeSkill.save().then((value) => {
                     logger.info("Default code skill created:" + value);
                 }).catch((err) => { logger.error("Error creating code skill: " + err); }),
                 androidSkill.save().then((value) => {
                     logger.info("Default android skill created:" + value);
                 }).catch((err) => { logger.error("Error creating android skill: " + err); }),
+                androidTestingSkill.save().then((value) => {
+                    logger.info("Default android testing skill created:" + value);
+                }).catch((err) => { logger.error("Error creating android testing skill: " + err); }),
                 testingSkill.save().then((value) => {
                     logger.info("Default testing skill created:" + value);
                 }).catch((err) => { logger.error("Error creating testing skill: " + err); }),
@@ -276,21 +300,22 @@ module.exports = function() {
             ]).then(() => {
 
                 androidSkill.tools = [androidTool, kotlinTool];
-                testingSkill.tools = [cucumberTool, calabashTool];
+                androidTestingSkill.tools = [junitTool, calabashTool];
+                testingSkill.tools = [junitTool, cucumberTool];
 
-                xpDkt.tools = [androidTool, reactTool, kotlinTool, cucumberTool];
+                xpDkt.tools = [androidTool, reactTool, kotlinTool, calabashTool];
                 xpEqs.tools = [androidTool, ionicTool, invisionTool];
                 xpPresta.tools = [phpTool, prestashopTool, javascriptTool];
                 xpNeuf.tools = [pythonTool, djangoTool, javascriptTool];
                 xpEpitech.tools = [shellTool, cTool, cppTool];
 
-                cvAndroid.skills = [codeSkill, testingSkill];
+                cvAndroid.skills = [archSkill, codeSkill, androidTestingSkill];
                 cvAndroid.experiences = [xpDkt, xpEqs];
                 cvAndroid.formations = [xpEpitech];
-                cvWeb.skills = [codeSkill, testingSkill];
+                cvWeb.skills = [archSkill, codeSkill, testingSkill];
                 cvWeb.experiences = [xpPresta, xpNeuf];
                 cvWeb.formations = [xpEpitech];
-                cv.skills = [codeSkill, testingSkill, androidSkill];
+                cv.skills = [archSkill, codeSkill, androidSkill, testingSkill];
                 cv.experiences = [xpDkt, xpEqs, xpPresta, xpNeuf];
                 cv.formations = [xpEpitech];
 
@@ -300,12 +325,15 @@ module.exports = function() {
                     androidSkill.save().then((value) => {
                         logger.info("Default android skill updated:" + value);
                     }).catch((err) => { logger.error("Error updating android skill: " + err); }),
+                    androidTestingSkill.save().then((value) => {
+                        logger.info("Default testing skill updated:" + value);
+                    }).catch((err) => { logger.error("Error updating android testing skill: " + err); }),
                     testingSkill.save().then((value) => {
                         logger.info("Default testing skill updated:" + value);
-                    }).catch((err) => { logger.error("Error updating android skill: " + err); }),
+                    }).catch((err) => { logger.error("Error updating testing skill: " + err); }),
                     xpDkt.save().then((value) => {
-                        logger.info("Default android xp updated:" + value);
-                    }).catch((err) => { logger.error("Error updating android xp: " + err); }),
+                        logger.info("Default dkt xp updated:" + value);
+                    }).catch((err) => { logger.error("Error updating dkt xp: " + err); }),
                     xpNeuf.save().then((value) => {
                         logger.info("Default neuf xp updated:" + value);
                     }).catch((err) => { logger.error("Error updating neuf xp: " + err); }),
@@ -341,3 +369,5 @@ module.exports = function() {
 
     return cvs;
 };
+
+

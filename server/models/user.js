@@ -35,11 +35,17 @@ let validateLocalStrategyPassword = function(password) {
 };
 
 let UserSchema = new Schema({
-    fullName: {
+    firstName: {
         type: String,
         trim: true,
         "default": "",
-        validate: [validateLocalStrategyProperty, "Please fill in your full name"]
+        validate: [validateLocalStrategyProperty, "Please fill in your first name"]
+    },
+    lastName: {
+        type: String,
+        trim: true,
+        "default": "",
+        validate: [validateLocalStrategyProperty, "Please fill in your last name"]
     },
     email: {
         type: String,
@@ -49,7 +55,7 @@ let UserSchema = new Schema({
         lowercase: true,
         "default": "",
         validate: [validateLocalStrategyProperty, "Please fill in your email"],
-        match: [/.+\@.+\..+/, "Please fill a valid email address"]
+        match: [/.+\..+\@.+\..+/, "Please fill a valid Niji email address"]
     },
     username: {
         type: String,
@@ -213,7 +219,8 @@ UserSchema.methods.decodeID = function(code) {
 UserSchema.methods.pick = function(props, model) {
     return _.pick(model || this.toJSON(), props || [
         "code",
-        "fullName",
+        "firstName",
+        "lastName",
         "email",
         "username",
         "roles",

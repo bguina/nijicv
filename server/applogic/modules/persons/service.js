@@ -21,7 +21,7 @@ module.exports = {
         role: "user",
         collection: User,
 
-        modelPropFilter: "code username fullName avatar lastLogin roles"
+        modelPropFilter: "code username firstName lastName avatar lastLogin roles"
     },
     
     actions: {
@@ -61,7 +61,8 @@ module.exports = {
         types: `
             type Person {
                 code: String!
-                fullName: String
+                firstName: String
+                lastName: String
                 username: String
                 roles: [String]
                 avatar: String
@@ -98,7 +99,8 @@ query getPerson {
 
 fragment personFields on Person {
   code
-  fullName
+  firstName
+  lastName
   username
   roles
   avatar

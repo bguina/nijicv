@@ -19,7 +19,7 @@ module.exports = {
         permission: C.PERM_LOGGEDIN,
         role: "user",
         collection: Cv,
-        modelPropFilter: "code name title thumbnailUrl status skills experiences formations"
+        modelPropFilter: "code ownerId title icon status skills experiences formations"
     },
     
     actions: {
@@ -28,6 +28,7 @@ module.exports = {
             handler(ctx) {
                 let filter = {};
                 let query = Cv.find(filter)
+                    .populate("ownerId")
                     .populate("skills")
                     .populate({
                         path: "skills",
@@ -64,9 +65,9 @@ module.exports = {
             this.validateParams(ctx, true);
             
             let cv = new Cv({
-                name: ctx.params.name,
+                ownerId: ctx.params.ownerId,
                 title: ctx.params.title,
-                thumbnailUrl: ctx.params.thumbnailUrl,
+                icon: ctx.params.icon,
                 tag: ctx.params.tag,
                 status: ctx.params.status,
             });
@@ -97,8 +98,8 @@ module.exports = {
                 if (ctx.params.title != null)
                     doc.title = ctx.params.title;
 
-                if (ctx.params.thumbnailUrl != null)
-                    doc.thumbnailUrl = ctx.params.thumbnailUrl;
+                if (ctx.params.icon != null)
+                    doc.icon = ctx.params.icon;
                 
                 if (ctx.params.status != null)
                     doc.status = ctx.params.status;
@@ -168,7 +169,6 @@ module.exports = {
 
             ctx.validateParam("name").trim().notEmpty(ctx.t("app:CvNameCannotBeBlank")).end();
             ctx.validateParam("title").trim().notEmpty(ctx.t("app:CvTitleCannotBeBlank")).end();
-            ctx.validateParam("thumbnailUrl").trim().notEmpty(ctx.t("app:CvThumbnailUrlCannotBeBlank")).end();
             ctx.validateParam("tag").trim().end();
             ctx.validateParam("status").isNumber(ctx.t("app:CvStatusMustBeNumber"));
 
@@ -198,7 +198,7 @@ module.exports = {
         type Cv {
             name: String!
             title: String!
-            thumbnailUrl: String!
+            icon: String!
             status: Int
             skills: [String!]
             experiences: [String!]
@@ -207,8 +207,8 @@ module.exports = {
         `,
 
         mutation: `
-        cvCreate(name: String!, title: String!, tag: String, thumbnailUrl: String!, status: Int): Cv
-        cvUpdate(code: String!, name: String!, title: String!, tag: String, thumbnailUrl: String!, status: Int, skills: [String!], experiences: [String!], formations: [String!]): Cv
+        cvCreate(name: String!, title: String!, tag: String, icon: String!, status: Int): Cv
+        cvUpdate(code: String!, name: String!, title: String!, tag: String, icon: String!, status: Int, skills: [String!], experiences: [String!], formations: [String!]): Cv
         cvRemove(code: String!): Cv
         `,
 

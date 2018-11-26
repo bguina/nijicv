@@ -14,12 +14,11 @@ export const clearSelection = ({ commit }) => {
     commit(CLEAR_SELECT);
 };
 
-export const downloadCvs = ({ commit }) => {
+export const downloadUserCvs = ({ commit }, userId) => {
     axios.get(NAMESPACE).then((response) => {
-        console.log("got cvs: "+JSON.stringify(response));
         let res = response.data;
+        console.log("got cvs of " + userId);
         if (res.status == 200 && res.data) {
-
             for (let cv of res.data) {
                 let dict = {};
 
@@ -31,13 +30,14 @@ export const downloadCvs = ({ commit }) => {
                 }
 
                 cv.skills = dict;
+                console.log("done cv: "+cv.title);
             }
 
             commit(LOAD, res.data);
         } else
             console.error("Request error!", res.error);
     }).catch((response) => {
-        console.error("Request error!", response.statusText);
+        console.error("Request error!", response.error.message);
     });
 };
 

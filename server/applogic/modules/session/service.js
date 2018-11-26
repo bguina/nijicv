@@ -84,7 +84,8 @@ query getOnlineUser {
 
 fragment personFields on Person {
   code
-  fullName
+  firstName
+  lastName
   email
   username
   roles

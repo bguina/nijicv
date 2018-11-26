@@ -31,15 +31,18 @@ module.exports = {
             },
             {
                 title: _("Tools"),
-                field: "tools"
+                field: "tools",
+                formatter(value, model, col) {
+                    return value ? "<i class='fa fa-check'/>" : "<i class='fa fa-ban'/>";
+                },
             },
             {
                 title: _("Position"),
                 field: "position"
             },
             {
-                title: _("ThumbnailUrl"),
-                field: "thumbnailUrl"
+                title: _("BusinessIcon"),
+                field: "icon"
             },
             {
                 title: _("Business"),
@@ -105,11 +108,11 @@ module.exports = {
             {
                 type: "input",
                 inputType: "text",
-                label: _("ThumbnailUrl"),
-                model: "thumbnailUrl",
+                label: _("Icon"),
+                model: "icon",
                 featured: false,
                 required: false,
-                placeholder: _("ExperienceThumbnailUrl"),
+                placeholder: _("ExperienceIcon"),
                 validator: validators.string
             },
             {

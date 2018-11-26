@@ -28,9 +28,9 @@
 	"DeviceDeleted": "Device deleted",
 	"DeviceNotFound": "Device not found!",
 
-	"DeviceNameAdded": "Device '{{data.name}}' added by {{user.fullName}}!",
-	"DeviceNameUpdated": "Device '{{data.name}}' updated by {{user.fullName}}!",
-	"DeviceNameDeleted": "Device '{{data.name}}' deleted by {{user.fullName}}!",
+	"DeviceNameAdded": "Device '{{data.name}}' added by {{user.firstName}} {{user.lastName}}!",
+	"DeviceNameUpdated": "Device '{{data.name}}' updated by {{user.firstName}} {{user.lastName}}!",
+	"DeviceNameDeleted": "Device '{{data.name}}' deleted by {{user.firstName}} {{user.lastName}}!",
 
 	"DeviceNameCannotBeBlank": "Device name cannot be blank!",
 
@@ -75,11 +75,11 @@
 	"PostUpdated": "Post updated",
 	"PostDeleted": "Post deleted",
 
-	"PostNameAdded": "Post '{{data.title}}' added by {{user.fullName}}!",
-	"PostNameUpdated": "Post '{{data.title}}' updated by {{user.fullName}}!",
-	"PostNameDeleted": "Post '{{data.title}}' deleted by {{user.fullName}}!",
-	"PostNameVoted": "Post '{{data.title}}' voted by {{user.fullName}}!",
-	"PostNameUnvoted": "Post '{{data.title}}' unvoted by {{user.fullName}}!",
+	"PostNameAdded": "Post '{{data.title}}' added by {{user.firstName}} {{user.lastName}}!",
+	"PostNameUpdated": "Post '{{data.title}}' updated by {{user.firstName}} {{user.lastName}}!",
+	"PostNameDeleted": "Post '{{data.title}}' deleted by {{user.firstName}} {{user.lastName}}!",
+	"PostNameVoted": "Post '{{data.title}}' voted by {{user.firstName}} {{user.lastName}}!",
+	"PostNameUnvoted": "Post '{{data.title}}' unvoted by {{user.firstName}} {{user.lastName}}!",
 
 	"InvalidCode": "Invalid code!",
 

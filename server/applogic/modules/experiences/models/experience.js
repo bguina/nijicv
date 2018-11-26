@@ -21,15 +21,15 @@ let schemaOptions = {
 };
 
 let ExperienceSchema = new Schema({
-    business: {
-        type: String,
-        trim: true
-    },
-    thumbnailUrl: {
-        type: String,
-        trim: true
-    },
     linkUrl: {
+        type: String,
+        trim: true
+    },
+    icon: {
+        type: String,
+        trim: true
+    },
+    business: {
         type: String,
         trim: true
     },

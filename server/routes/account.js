@@ -79,19 +79,19 @@ module.exports = function(app, db) {
     app.post("/signup", function(req, res) {
         if (config.features.disableSignUp === true)
             return res.redirect("/");
-
-        req.assert("name", req.t("NameCannotBeEmpty")).notEmpty();
+        
+        req.assert("firstName", req.t("FirstNameCannotBeEmpty")).notEmpty();
+        req.assert("lastName", req.t("LastNameCannotBeEmpty")).notEmpty();
         req.assert("email", req.t("EmailCannotBeEmpty")).notEmpty();
         req.assert("email", req.t("EmailIsNotValid")).isEmail();
         req.sanitize("email").normalizeEmail({ remove_dots: false });
 
         //req.assert("username", req.t("UsernameCannotBeEmpty")).notEmpty();
-        
         if (!req.body.username)
             req.body.username = req.body.email;
 
         req.sanitize("passwordless").toBoolean();
-        let passwordless = req.body.passwordless === true;
+        let passwordless = false && req.body.passwordless === true;
         if (!passwordless) {
             req.assert("password", req.t("PasswordCannotBeEmpty")).notEmpty();
             req.assert("password", req.t("PasswordTooShort")).len(6);
@@ -128,7 +128,8 @@ module.exports = function(app, db) {
             function createUser(token, password, done) {
 
                 let user = new User({
-                    fullName: req.body.name,
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
                     email: req.body.email,
                     username: req.body.username,
                     password: password,
@@ -180,7 +181,7 @@ module.exports = function(app, db) {
                     let subject = req.t("mailSubjectWelcome", config);
 
                     res.render("mail/welcome", {
-                        name: user.fullName
+                        name: user.firstName
                     }, function(err, html) {
                         if (err)
                             return done(err);
@@ -198,7 +199,7 @@ module.exports = function(app, db) {
                     let subject = req.t("mailSubjectActivate", config);
 
                     res.render("mail/accountVerify", {
-                        name: user.fullName,
+                        name: user.firstName,
                         validateLink: "http://" + req.headers.host + "/verify/" + user.verifyToken
                     }, function(err, html) {
                         if (err)
@@ -279,7 +280,7 @@ module.exports = function(app, db) {
                 let subject = req.t("mailSubjectWelcome", config);
 
                 res.render("mail/welcome", {
-                    name: user.fullName
+                    name: user.firstName
                 }, function(err, html) {
                     if (err)
                         return done(err);
@@ -419,7 +420,7 @@ module.exports = function(app, db) {
                 let subject = req.t("mailSubjectResetPassword", config);
 
                 res.render("mail/passwordReset", {
-                    name: user.fullName,
+                    name: user.firstName,
                     resetLink: "http://" + req.headers.host + "/reset/" + token
                 }, function(err, html) {
                     if (err)
@@ -521,7 +522,7 @@ module.exports = function(app, db) {
                 let subject = req.t("mailSubjectPasswordChanged", config);
 
                 res.render("mail/passwordChange", {
-                    name: user.fullName
+                    name: user.firstName
                 }, function(err, html) {
                     if (err)
                         return done(err);

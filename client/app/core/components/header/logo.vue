@@ -2,8 +2,8 @@
     .logo
         a.nav-item(href="#")
             span 
-                strong VEM
-                | App
+                strong Niji
+                | Cv
 </template>
 
 <script>

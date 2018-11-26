@@ -22,8 +22,8 @@ module.exports = {
                 }
             },
             {
-                title: _("ThumbnailUrl"),
-                field: "thumbnailUrl"
+                title: _("Icon"),
+                field: "icon"
             },
             {
                 title: _("Name"),
@@ -58,10 +58,13 @@ module.exports = {
                 type: "input",
                 inputType: "text",
                 label: _("ThumbnailUrl"),
-                model: "thumbnailUrl",
+                model: "icon",
                 placeholder: _("ToolThumbnailUrl"),
                 required: true,
-                validator: validators.string
+                validator: validators.string,
+                get(model) {
+                    return "you tool";
+                }
             },
             {
                 type: "input",

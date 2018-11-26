@@ -4,19 +4,19 @@
             .title {{ "General" | i18n }}
             ul
                 router-link(tag="li", to="/")
-                    a(:title="_('Home')")
+                    a(:title="_('My CVs')")
                         span.icon
                             i.fa.fa-home
                         span.label {{ "Home" | i18n }}
 
                 router-link(tag="li", to="/cv")
-                    a(:title="_('Cv')")
+                    a(:title="_('Update a CV')")
                         span.icon
                             i.fa.fa-file-code-o
                         span.label {{ "Cv" | i18n }}
 
                 router-link(tag="li", to="/experiences")
-                    a(:title="_('Experiences')")
+                    a(:title="_('Update my experiences')")
                         span.icon
                             i.fa.fa-film
                         span.label {{ "Experiences" | i18n }}
@@ -45,13 +45,11 @@
 
         .footer
             .social
-                a(href="", target="_blank")
-                    i.fa.fa-facebook
-                a(href="https://twitter.com/Icebobcsi", target="_blank")
+                a(href="https://twitter.com/Niji", target="_blank")
                     i.fa.fa-twitter
                 a(href="https://github.com/icebob/vue-express-mongo-boilerplate", target="_blank")
                     i.fa.fa-github
-            .copyright &copy; Copyright, 2016
+            //.copyright &copy; Copyright, 2016
 </template>
 
 <script>
@@ -66,3 +64,4 @@
 
 <style lang="scss">
 </style>
+

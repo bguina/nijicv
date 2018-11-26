@@ -145,7 +145,7 @@ module.exports = function(app, db) {
                     let subject = req.t("mailSubjectLogin", config);
 
                     res.render("mail/passwordLessLogin", {
-                        name: user.fullName,
+                        name: user.firstName,
                         loginLink: "http://" + req.headers.host + "/passwordless/" + token
                     }, function(err, html) {
                         if (err)
@@ -194,7 +194,6 @@ module.exports = function(app, db) {
 
     /**
      * Facebook authentication routes
-     */
     authRouter.get("/facebook", passport.authenticate("facebook", {
         scope: ["email", "user_location"]
     }));
@@ -204,10 +203,10 @@ module.exports = function(app, db) {
     }), function(req, res) {
         res.redirect("/");
     }); 
+     */
 
     /**
      * Twitter authentication routes
-     */
     authRouter.get("/twitter", passport.authenticate("twitter"));
 
     authRouter.get("/twitter/callback", passport.authenticate("twitter", {
@@ -215,6 +214,7 @@ module.exports = function(app, db) {
     }), function(req, res) {
         res.redirect("/");
     }); 
+     */
 
     /**
      * Github authentication routes

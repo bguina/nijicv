@@ -5,7 +5,7 @@
         .col-sm-9
             h5
                 a(v-bind:href="linkUrl")
-                    img.img-thumbnail(v-if="thumbnailUrl" v-bind:src="thumbnailUrl" v-bind:alt="business")
+                    img.img-thumbnail(v-if="icon" v-bind:src="icon" v-bind:alt="business")
                 | {{ business }} - {{ position }}
             p {{ description }}
             ul
@@ -23,8 +23,8 @@
         name: "experience",
         components: { Tool },
         props: {
-            thumbnailUrl: String,
             linkUrl: String,
+            icon: String,
             business: String,
             position: String,
             description: String,
